@@ -11,7 +11,7 @@ export const taskSlice = createSlice({
     },
     removeTask: (state, action) => {
       console.log("delete task", action.payload);
-      state.tasks.splice(0, action.payload);
+      state.tasks.splice(action.payload, 1);
     },
   },
 });
