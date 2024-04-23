@@ -1,11 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask } from "../../features/tasks/taskSlice";
+import { useEffect } from "react";
 
 const TodoList = () => {
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
   console.log("List of tasks", tasks);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const deleteTask = (id) => {
     console.log(id);

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const taskSlice = createSlice({
   name: "taskManager",
   initialState: {
-    tasks: [],
+    tasks: JSON.parse(localStorage.getItem("tasks")),
   },
   reducers: {
     addTask: (state, action) => {
