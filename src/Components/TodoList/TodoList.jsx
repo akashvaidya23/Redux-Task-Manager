@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeTask } from "../../features/tasks/taskSlice";
+import { removeTask, toggleCart } from "../../features/tasks/taskSlice";
 import { useEffect } from "react";
 
 const TodoList = () => {
@@ -11,11 +11,6 @@ const TodoList = () => {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-
-  const deleteTask = (id) => {
-    console.log(id);
-    dispatch(removeTask(id));
-  };
 
   return (
     <>
@@ -33,7 +28,7 @@ const TodoList = () => {
             return (
               <tr key={index}>
                 <td style={{ border: "1px solid black" }}>{index + 1}</td>
-                <td style={{ border: "1px solid black" }}>{task}</td>
+                <td style={{ border: "1px solid black" }}>{task.name}</td>
                 <td style={{ border: "1px solid black" }}>
                   <button
                     onClick={() => {
@@ -42,6 +37,24 @@ const TodoList = () => {
                   >
                     Delete
                   </button>
+                  {"    "}
+                  {!task.added_to_cart ? (
+                    <button
+                      onClick={() => {
+                        dispatch(toggleCart(index));
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        dispatch(toggleCart(index));
+                      }}
+                    >
+                      Remove from Cart
+                    </button>
+                  )}
                 </td>
               </tr>
             );
